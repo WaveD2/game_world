@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { AnimatePresence } from 'framer-motion';
+import {motion, AnimatePresence} from 'framer-motion';
 import { Play, Pause, Check, X, RotateCcw } from 'lucide-react';
 import { questions } from './data';
 import './App.css';
