@@ -1,0 +1,205 @@
+/* src/App.css */
+@import url('https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap');
+
+:root {
+  --primary: #e57e65;
+  --bg: #fcece8;
+  --border: #2c2c2c;
+  --cell-size: 42px; /* Kích thước ô cố định */
+  --gap: 8px;        /* Khoảng cách giữa các ô */
+  --font-main: 'Patrick Hand', cursive;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-main);
+  background-color: var(--bg);
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden; /* CẤM SCROLL TUYỆT ĐỐI Ở BODY */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#root {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.game-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+/* Tiêu đề */
+.title-box {
+  background: #f1c40f;
+  border: 3px solid var(--border);
+  border-radius: 15px;
+  padding: 5px 30px;
+  margin-bottom: 20px;
+  box-shadow: 4px 4px 0px var(--border);
+  z-index: 10;
+  flex-shrink: 0; /* Không bị co lại khi màn hình bé */
+}
+
+.title-box h1 {
+  margin: 0;
+  font-size: 2.2rem;
+  color: var(--border);
+  white-space: nowrap;
+}
+
+/* --- LOGIC BÀN CỜ --- */
+.board-wrapper {
+  /* Đây là khung bao để xử lý Scale */
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+}
+
+.grid-board {
+  display: flex;
+  flex-direction: column;
+  gap: 10px; /* Khoảng cách giữa các dòng */
+  /* Width tự động theo nội dung để căn giữa chuẩn */
+  width: max-content; 
+}
+
+.row-container {
+  display: flex;
+  align-items: center;
+  height: var(--cell-size);
+}
+
+/* Cột số thứ tự: Cố định độ rộng để không ảnh hưởng lưới bên phải */
+.question-col {
+  width: 60px; /* Cố định chiều rộng cột số */
+  display: flex;
+  justify-content: flex-end; /* Số nằm sát về phía ô chữ */
+  padding-right: 15px;
+  flex-shrink: 0;
+}
+
+.question-btn {
+  width: 38px; height: 38px;
+  border-radius: 50%;
+  background: white;
+  border: 2px solid var(--border);
+  font-family: var(--font-main);
+  font-size: 1.2rem;
+  font-weight: bold;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 2px 2px 0 rgba(0,0,0,0.1);
+  transition: all 0.2s;
+}
+
+.question-btn:hover { background: #ffd700; transform: scale(1.1); }
+.question-btn.solved { background: #4caf50; color: white; border-color: #388e3c; }
+
+/* Khu vực chứa ô chữ */
+.cells-row {
+  display: flex;
+  align-items: center;
+  gap: var(--gap); /* Sử dụng biến Gap chuẩn */
+  /* Chiều cao bằng ô để tránh lệch dòng */
+  height: var(--cell-size); 
+}
+
+/* src/App.css */
+.cell {
+  width: var(--cell-size);
+  height: var(--cell-size);
+  border: 2px solid var(--border);
+  background: white;
+  
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  color: var(--border); 
+  
+  font-size: 1.6rem; 
+  font-weight: 800;  
+  
+  border-radius: 6px;
+  box-shadow: 2px 2px 0 rgba(0,0,0,0.1);
+  text-transform: uppercase;
+  flex-shrink: 0;
+  
+  user-select: none;
+}
+
+/* Modal Controls - Giữ nguyên */
+.modal-overlay {
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,0.7);
+  z-index: 100;
+  display: flex; align-items: center; justify-content: center;
+  backdrop-filter: blur(3px);
+}
+
+.modal-content {
+  background: white;
+  width: 90%; max-width: 400px;
+  padding: 20px;
+  border: 3px solid var(--border);
+  border-radius: 12px;
+  position: relative;
+  text-align: center;
+  box-shadow: 10px 10px 0 rgba(0,0,0,0.2);
+}
+
+.controls {
+  display: flex; justify-content: center; gap: 10px; margin-top: 20px;
+}
+
+.btn {
+  padding: 8px 16px;
+  border: 2px solid var(--border);
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  display: flex; align-items: center; gap: 5px;
+}
+
+/* --- RESPONSIVE SCALE (QUAN TRỌNG) --- */
+/* Thay vì scroll, ta thu nhỏ bàn cờ lại */
+@media (max-width: 768px) {
+  .grid-board {
+    /* Thu nhỏ còn 85% trên tablet */
+    transform: scale(0.85); 
+    transform-origin: center center;
+  }
+}
+
+@media (max-width: 480px) {
+  .grid-board {
+    /* Thu nhỏ còn 65% trên mobile */
+    transform: scale(0.65);
+    transform-origin: center top; /* Scale từ trên xuống để ko bị đẩy lên trời */
+  }
+  
+  .title-box {
+    transform: scale(0.8);
+    margin-bottom: 5px;
+  }
+  
+  /* Đẩy linh vật nhỏ lại */
+  .mascot { width: 80px; bottom: 10px; right: 10px;}
+}
