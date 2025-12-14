@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import {motion, AnimatePresence} from 'framer-motion';
-import { Play, Pause, Check, X, RotateCcw } from 'lucide-react';
+import { Play, Pause, Check, X, RotateCcw, Lightbulb } from 'lucide-react';
 import { questions } from './data';
 import './App.css';
 
@@ -12,6 +12,7 @@ function App() {
   const [activeQ, setActiveQ] = useState(null);
   const [solvedIds, setSolvedIds] = useState([]);
   const [isPlaying, setIsPlaying] = useState(false);
+  const [showHint, setShowHint] = useState(false);
   const audioRef = useRef(new Audio());
 
   useEffect(() => {
@@ -21,6 +22,7 @@ function App() {
   const handleOpen = (q) => {
     audioRef.current.pause();
     setIsPlaying(false);
+    setShowHint(false);
     
     setActiveQ(q);
     audioRef.current.src = q.audioUrl;
@@ -31,6 +33,7 @@ function App() {
   const handleClose = () => {
     audioRef.current.pause();
     setIsPlaying(false);
+    setShowHint(false);
     setActiveQ(null);
   };
 
@@ -80,7 +83,7 @@ function App() {
   return (
     <div className="game-container">
       <motion.div className="title-box" initial={{ y: -50 }} animate={{ y: 0 }}>
-        <h1>Ô CHỮ BÍ MẬT 🐞</h1>
+        <h1>GIAI ĐIỆU THÂN QUEN 🎶</h1>
       </motion.div>
 
       <div className="board-wrapper">
@@ -106,12 +109,18 @@ function App() {
                 {q.answer.split('').map((char, idx) => (
                   <motion.div 
                     key={idx}
-                    className="cell"
+                    className={`cell ${idx === q.keyPosition ? 'key-cell' : ''}`}
                     initial={{ rotateX: 0 }}
                     animate={{ 
                       rotateX: solvedIds.includes(q.id) ? 360 : 0,
-                      backgroundColor: solvedIds.includes(q.id) ? '#ffd700' : '#fff',
-                      color: solvedIds.includes(q.id) ? '#2c2c2c' : 'transparent'
+                      backgroundColor: idx === q.keyPosition
+                        ? '#e74c3c'
+                        : solvedIds.includes(q.id)
+                          ? '#ffe66d'
+                          : '#fff',
+                      color: solvedIds.includes(q.id) 
+                        ? (idx === q.keyPosition ? '#fff' : '#2d3436')
+                        : 'transparent'
                     }}
                     transition={{ duration: 0.5, delay: idx * 0.05 }}
                   >
@@ -134,34 +143,48 @@ function App() {
               exit={{ scale: 0.5, opacity: 0 }}
               onClick={(e) => e.stopPropagation()}
             >
-              <button 
-                style={{position:'absolute', top:10, right:10, border:'none', background:'transparent', fontSize: 20, cursor:'pointer'}} 
+              {/* <button 
+                className="close-btn"
                 onClick={handleClose}
               >
-                <X />
-              </button>
+                <X size={20} style={{color: 'red'}}/>
+              </button> */}
 
-              <h2 style={{color:'#e57e65'}}>Câu {activeQ.id}</h2>
-              <p style={{color:'#e57e65'}}>"{activeQ.hint}"</p>
+              <h2>Câu {activeQ.id}</h2>
               
-              <div className="controls">
-                <button className="btn" onClick={togglePlay} style={{background:'#ffd700'}}>
-                   {isPlaying ? <Pause size={18}/> : <Play size={18}/>} 
-                   {isPlaying ? "Dừng" : "Phát"}
-                </button>
-
-                <button className="btn" onClick={handleReplay} style={{background:'#81d4fa'}}>
-                   <RotateCcw size={18}/> Lại
-                </button>
-
-                <button className="btn" onClick={handleSolve} style={{background:'#e57e65', color:'white'}}>
-                   <Check size={18}/> Đáp án
-                </button>
-              </div>
+              {showHint && (
+                <div className="hint-box">
+                  <p>"{activeQ.hint}"</p>
+                </div>
+              )}
               
               {solvedIds.includes(activeQ.id) && (
-                 <h3 style={{color:'#e57e65', marginTop: 15}}>{activeQ.displayAnswer}</h3>
+                <div className="answer-box">
+                  <h3>{activeQ.displayAnswer}</h3>
+                </div>
               )}
+              
+              <div className="controls">
+                <button className="btn btn-play" onClick={togglePlay}>
+                  {isPlaying ? <Pause size={16}/> : <Play size={16}/>} 
+                  <span>{isPlaying ? "Dừng" : "Phát"}</span>
+                </button>
+
+                <button className="btn btn-replay" onClick={handleReplay}>
+                  <RotateCcw size={16}/> 
+                  <span>Lại</span>
+                </button>
+
+                <button className="btn btn-hint" onClick={() => setShowHint(!showHint)}>
+                  <Lightbulb size={16}/> 
+                  <span>{showHint ? 'Ẩn' : 'Gợi ý'}</span>
+                </button>
+                
+                <button className="btn btn-solve" onClick={handleSolve}>
+                  <Check size={16}/> 
+                  <span>Đáp án</span>
+                </button>
+              </div>
             </motion.div>
           </div>
         )}
