@@ -14,13 +14,18 @@ function App() {
   const [isPlaying, setIsPlaying] = useState(false);
   const [showHint, setShowHint] = useState(false);
   const audioRef = useRef(new Audio());
+  const lyricAudioRef = useRef(new Audio());
 
   useEffect(() => {
-    return () => { audioRef.current.pause(); };
+    return () => { 
+      audioRef.current.pause();
+      lyricAudioRef.current.pause();
+    };
   }, []);
 
   const handleOpen = (q) => {
     audioRef.current.pause();
+    lyricAudioRef.current.pause();
     setIsPlaying(false);
     setShowHint(false);
     
@@ -32,6 +37,7 @@ function App() {
 
   const handleClose = () => {
     audioRef.current.pause();
+    lyricAudioRef.current.pause();
     setIsPlaying(false);
     setShowHint(false);
     setActiveQ(null);
@@ -64,9 +70,26 @@ function App() {
     }
   };
 
-  const handleSolve = () => {
+  const handleSolve = async () => {
     if (activeQ && !solvedIds.includes(activeQ.id)) {
       setSolvedIds(prev => [...prev, activeQ.id]);
+      
+      // Phát nhạc lyric khi hiển thị đáp án
+      if (activeQ.audioLyricUrl) {
+        try {
+          // Dừng nhạc karaoke nếu đang phát
+          audioRef.current.pause();
+          setIsPlaying(false);
+          
+          // Phát nhạc lyric
+          lyricAudioRef.current.src = activeQ.audioLyricUrl;
+          lyricAudioRef.current.load();
+          await lyricAudioRef.current.play();
+        } catch (err) {
+          console.error("Lỗi phát nhạc lyric:", err);
+          handleAudioError(err);
+        }
+      }
     }
   };
 

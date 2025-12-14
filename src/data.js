@@ -1,7 +1,8 @@
 export const questions = [
     {
       id: 1,
-      audioUrl: "./music/christmas-443109.mp3",
+      audioUrl: "./music/vangtrang-kara.mp3",
+      audioLyricUrl: "./music/vangtrang.mp3",
       answer: "VANGTRANGKHOC",
       displayAnswer: "VẰNG TRĂNG KHÓC",
       offset: 2, // Thụt vào 2 ô
@@ -10,7 +11,8 @@ export const questions = [
     },
     {
       id: 2,
-      audioUrl: "./music/deep-abstract-ambient_snowcap-401656.mp3",
+      audioUrl: "./music/xadap-kara.mp3",
+      audioLyricUrl: "./music/xadap.mp3",
       answer: "XEDAP",
       displayAnswer: "XE ĐẠP",
       offset: 10,
@@ -19,7 +21,8 @@ export const questions = [
     },
     {
       id: 3,
-      audioUrl: "./music/happy-birthday-155461.mp3",
+      audioUrl: "./music/bientinh-kara.mp3",
+      audioLyricUrl: "./music/bientinh.mp3",
       answer: "BIENTINH",
       displayAnswer: "BIỂN TỈNH",
       offset: 8,
@@ -28,7 +31,8 @@ export const questions = [
     },
     {
       id: 4,
-      audioUrl: "./music/no-copyright-music-423648.mp3",
+      audioUrl: "./music/hacgiay-kara.mp3",
+      audioLyricUrl: "./music/hacgiay.mp3",
       answer: "HACGIAY",
       displayAnswer: "HẠC GIẤY",
       offset: 8,
@@ -37,8 +41,9 @@ export const questions = [
     },
     {
       id: 5,
-      audioUrl: "./music/sweet-life-luxury-chill-438146.mp3",
-      answer: "YEULAITUĐU",
+      audioUrl: "./music/yeulaitudau-kara.mp3",
+      audioLyricUrl: "./music/yeulaitudau.mp3",
+      answer: "YEULAITUĐAU",
       displayAnswer: "YÊU LẠI TỪ ĐÂU",
       offset: 3,
       keyPosition: 8, // Vị trí chữ 'Đ' (0-indexed) - chữ thứ 9
@@ -46,7 +51,8 @@ export const questions = [
     },
     {
       id: 6,
-      audioUrl: "./music/sweet-life-luxury-chill-438146.mp3",
+      audioUrl: "./music/thucuoi-kara.mp3",
+      audioLyricUrl: "./music/thucuoi.mp3",
       answer: "THUCUOI",
       displayAnswer: "THU CUỐI",
       offset: 7,
