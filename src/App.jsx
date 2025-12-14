@@ -198,10 +198,10 @@ function App() {
                   <span>Lại</span>
                 </button>
 
-                <button className="btn btn-hint" onClick={() => setShowHint(!showHint)}>
+                {/* <button className="btn btn-hint" onClick={() => setShowHint(!showHint)}>
                   <Lightbulb size={16}/> 
                   <span>{showHint ? 'Ẩn' : 'Gợi ý'}</span>
-                </button>
+                </button> */}
                 
                 <button className="btn btn-solve" onClick={handleSolve}>
                   <Check size={16}/> 

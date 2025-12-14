@@ -468,7 +468,7 @@ body::before {
 .btn-solve {
   background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%);
   color: var(--white);
-  /* grid-column: 1 / -1; */
+  grid-column: 1 / -1;
 }
 
 /* --- RESPONSIVE SCALE (QUAN TRỌNG) --- */
