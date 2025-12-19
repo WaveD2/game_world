@@ -3,8 +3,8 @@ export const questions = [
       id: 1,
       audioUrl: "./music/vangtrang-kara.mp3",
       audioLyricUrl: "./music/vangtrangkhoc.mp3",
-      answer: "VẦNGTRĂNGKHÓC",
-      displayAnswer: "VÂNG TRĂNG KHÓC",
+      answer: "VầNGTRĂNGKHÓC",
+      displayAnswer: "VẦNG TRĂNG KHÓC",
       offset: 2,  
       keyPosition: 9,  
       hint: "Sơn Tùng M-TP - Hit 2013"
