@@ -3,8 +3,8 @@ export const questions = [
       id: 1,
       audioUrl: "./music/vangtrang-kara.mp3",
       audioLyricUrl: "./music/vangtrangkhoc.mp3",
-      answer: "VANGTRANGKHOC",
-      displayAnswer: "VẰNG TRĂNG KHÓC",
+      answer: "VẦNGTRĂNGKHÓC",
+      displayAnswer: "VÂNG TRĂNG KHÓC",
       offset: 2,  
       keyPosition: 9,  
       hint: "Sơn Tùng M-TP - Hit 2013"
@@ -23,8 +23,8 @@ export const questions = [
       id: 3,
       audioUrl: "./music/bientinh-kara.mp3",
       audioLyricUrl: "./music/bientinh.mp3",
-      answer: "BIỂNTỈNH",
-      displayAnswer: "BIỂN TỈNH",
+      answer: "BIỂNTÌNH",
+      displayAnswer: "BIỂN TÌNH",
       offset: 8,
       keyPosition: 3, // Vị trí chữ 'N' (0-indexed) - chữ thứ 4
       hint: "Mùa hè 2016 sôi động"
@@ -43,8 +43,8 @@ export const questions = [
       id: 5,
       audioUrl: "./music/yeulaitudau-kara.mp3",
       audioLyricUrl: "./music/yeulaitudau.mp3",
-      answer: "YÊULẠITỪĐÂU",
-      displayAnswer: "YÊU LẠI TỪ ĐÂU",
+      answer: "YÊULẠITỪĐẦU",
+      displayAnswer: "YÊU LẠI TỪ ĐẦU",
       offset: 3,
       keyPosition: 8, // Vị trí chữ 'Đ' (0-indexed) - chữ thứ 9
       hint: "Hợp tác quốc tế với Snoop Dogg"
